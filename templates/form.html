@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+   <head>
+      <title>{{ title }}</title>
+   </head>
+<body>
+<form action="{{ url_for("displayForm")}}" method="POST">
+    <label for="firstname">First Name:</label>
+    <input type="text" id="firstname" name="fname" placeholder="firstname">
+    <label for="lastname">Last Name:</label>
+    <input type="text" id="lastname" name="lname" placeholder="lastname">
+    <button type="submit">Login</button>
+    </form>
+    <div >{{ responseText }}</div>
+</body>
+</html>
