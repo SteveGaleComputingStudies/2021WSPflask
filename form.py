@@ -14,11 +14,13 @@ def displayForm():
         first_name = request.form.get("fname")
         # getting input with name = lname in HTML form
         last_name = request.form.get("lname")
+# SELECT * from users Where Firstname = 
+
         output =  "Your name is "+ first_name + " " + last_name
 
     # data to be displayed in form
     templateData = {
-        "title" : "test form1",
+        "title" : "test form 1",
         "responseText" : output
     }
     return render_template("form.html", **templateData)
