@@ -8,13 +8,15 @@ app = Flask(__name__)
 # which URL is associated function
 @app.route('/' , methods =["GET", "POST"])
 def displayForm():
-    output = ""
+    output = ""                 # display nothing if form is not submitted
     if request.method == "POST":
         # getting input with name = fname in HTML form
         first_name = request.form.get("fname")
         # getting input with name = lname in HTML form
         last_name = request.form.get("lname")
-        output =  "Your name is "+first_name + " " + last_name
+        output =  "Your name is "+ first_name + " " + last_name
+
+    # data to be displayed in form
     templateData = {
         "title" : "test form1",
         "responseText" : output
