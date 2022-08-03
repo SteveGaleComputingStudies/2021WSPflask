@@ -20,10 +20,10 @@ def displayForm():
 
     # data to be displayed in form
     templateData = {
-        "title" : "test form 1",
+        "title" : "Demo form 1",
         "responseText" : output
     }
     return render_template("form.html", **templateData)
 
 if __name__=='__main__':
-    app.run()
+    app.run("0.0.0.0" debug=True)
