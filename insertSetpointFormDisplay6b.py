@@ -28,15 +28,14 @@ def formDisplay():
             # print(r.text)
             responseData = r.json()
             if "Value" in responseData:
-                print("No value")
-                pass
-            else:
+                pass                    # value is returned from measured data table
+            else:                       # no value in measuredata Table
                 responseData = {'code':'502', 'Value' : 0 , 'message' : 'No Value', 'IOTSensorLocation': strIOTSensorLocation , 'Measurement': strMeasurement, 'Setpoint' : strSetpoint , 'Deadband' : strDeadband}    # format as a string 
         except requests.ConnectionError as err:
             responseData = {'code':'501', 'Value' : -1 , 'message' : '{}'.format(err), 'IOTSensorLocation': '00000000' , 'Measurement': 'Temperature', 'Setpoint' : 21 , 'Deadband' : 2}    # format as a string 
 
 
-        value = int(strSetpoint)+ int(strDeadband)          # for testing
+        # 
     else :
         strIOTSensorLocation =  "13111111"         # gets the form key / value pair - gets the value for 'IOTSensorLocation'
         strMeasurement =  "Humidity"                 # gets the form key / value pair - gets the value for 'Measurement'
