@@ -6,6 +6,7 @@
 # ref - https://www.sqlitetutorial.net/sqlite-python/insert/
 # https://www.sqlite.org/autoinc.html
 
+#pip install mysql-connector-python
 
 #import sqlite3
 #from sqlite3 import Error
