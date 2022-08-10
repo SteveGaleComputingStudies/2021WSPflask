@@ -1,0 +1,31 @@
+{% include 'header.html' %}
+
+    <div class="container">
+        <h2>Setpoint Insert  </h2>
+        
+        <form method="POST" action="">
+          <div class="form-group">
+            <label for="IOTSensorLocation">IOTSensorLocation:</label>
+            <input type="text" class="form-control" id="IOTSensorLocation" value="{{IOTSensorLocation}}" name="IOTSensorLocation">
+          </div>
+          <div class="form-group">
+            <label for="Measurement">Measurement:</label>
+            <input type="text" class="form-control" id="Measurement" value="{{Measurement}}" name="Measurement">
+          </div>
+          <div class="form-group">
+            <label for="Value">Value:</label>
+            <span >{{Value}}</span>
+          </div>          
+          <div class="form-group">
+            <label for="Setpoint">Setpoint:</label>
+            <input type="text" class="form-control" id="Setpoint" value="{{Setpoint}}" name="Setpoint">
+          </div>
+          <div class="form-group">
+            <label for="Deadband">Deadband:</label>
+            <input type="text" class="form-control" id="Deadband" value="{{Deadband}}" name="Deadband">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+      </div>
+{% include 'footer.html' %}
