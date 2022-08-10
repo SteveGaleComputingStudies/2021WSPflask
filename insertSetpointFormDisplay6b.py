@@ -27,6 +27,7 @@ def formDisplay():
             r = requests.post(url,data = contentJson) # works for local and AWS
             # print(r.text)
             responseData = r.json()
+            print(responseData) # for debugging
             if "Value" in responseData:
                 pass                    # value is returned from measured data table
             else:                       # no value in measuredata Table
