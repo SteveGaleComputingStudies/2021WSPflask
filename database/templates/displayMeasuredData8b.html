@@ -1,0 +1,32 @@
+
+{% include 'header.html' %}
+
+<div class="container">
+    <h2>Display Measured Data</h2>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for row in output_data %} <-- Using these '{%' and '%}' we can write our python code -->
+            <tr>
+                <td>{{row[0]}}</td>
+                <td>{{row[1]}}</td>
+                <td>{{row[2]}}</td>
+                <td>{{row[3]}}</td>
+            </tr>
+        {% endfor %}        <-- Because it is flask framework there would be other keywords like 'endfor'   -->
+    </tbody>
+</table>
+
+<div class="jumbotron text-center" style="margin-bottom:0">
+    <p>C Industry 4.0 project - 2022</p>
+  </div>
+  
+  </body>
+  </html>
