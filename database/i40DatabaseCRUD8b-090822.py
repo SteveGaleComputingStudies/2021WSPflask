@@ -29,7 +29,7 @@ def dBselectMeasuredData():
         conn = mysql.connector.connect(host="localhost", user="I40", passwd="Password1",database= mySQLdb2022)
         cur = conn.cursor()
 
-        cur.execute('SELECT * FROM MeasuredDataV3')
+        cur.execute('SELECT * FROM MeasuredDataV3 ORDER BY readDate DESC')
         data = cur.fetchall()
 
         #
