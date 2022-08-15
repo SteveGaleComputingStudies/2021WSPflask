@@ -32,6 +32,10 @@ def dBselectMeasuredData():
         cur.execute('SELECT * FROM MeasuredDataV3')
         data = cur.fetchall()
 
+        #
+        for row in data:
+            print(" {}  {}  {} ".format(row[0],row[1],row[2]))
+
     except mysql.connector.Error as err:
         print("Failed creating database: {}".format(err))
         return jsonify({'code':'500', 'message' : '{}'.format(err)})
