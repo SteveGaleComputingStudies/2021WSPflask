@@ -48,7 +48,7 @@ def dBselectMeasuredData():
 
 
 @app.route('/api/v1/selectSetpoints/')
-def dBselectMeasuredData():
+def dBselectSetpoints():
     try: 
         conn = mysql.connector.connect(host="localhost", user="I40", passwd="Password1",database= mySQLdb2022)
         cur = conn.cursor()
