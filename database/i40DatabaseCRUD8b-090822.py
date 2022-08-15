@@ -47,6 +47,30 @@ def dBselectMeasuredData():
 # https://stackoverflow.com/questions/45558349/flask-display-database-from-python-to-html
 
 
+@app.route('/api/v1/selectSetpoints/')
+def dBselectMeasuredData():
+    try: 
+        conn = mysql.connector.connect(host="localhost", user="I40", passwd="Password1",database= mySQLdb2022)
+        cur = conn.cursor()
+
+        cur.execute('SELECT * FROM SetpointsV3')
+        data = cur.fetchall()
+
+        #
+        for row in data:
+            print(" {}  {}  {} ".format(row[0],row[1],row[2]))
+
+    except mysql.connector.Error as err:
+        print("Failed creating database: {}".format(err))
+        return jsonify({'code':'500', 'message' : '{}'.format(err)})
+
+    finally:
+        if conn:
+            conn.close()
+    return render_template('displayMeasuredData8b.html', output_data = data)
+# https://stackoverflow.com/questions/45558349/flask-display-database-from-python-to-html
+
+
 @app.route('/api/v1/createMySQLdb/', methods=['GET', 'POST'])
 def dBcreateMySQLdb():
     try: 
