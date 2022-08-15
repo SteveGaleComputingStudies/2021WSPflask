@@ -34,6 +34,7 @@ def dBselectMeasuredData():
 
     except mysql.connector.Error as err:
         print("Failed creating database: {}".format(err))
+        return jsonify({'code':'500', 'message' : '{}'.format(err)})
 
     finally:
         if conn:
