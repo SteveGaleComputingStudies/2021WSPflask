@@ -1,0 +1,19 @@
+{% include 'header.html' %}
+
+    <div class="container">
+        <h2>Measured Data Display by IOTsensorLocation and Measurement  </h2>
+        
+        <form method="POST" action="">
+          <div class="form-group">
+            <label for="IOTSensorLocation">IOTSensorLocation:</label>
+            <input type="text" class="form-control" id="IOTSensorLocation" value="{{IOTSensorLocation}}" name="IOTSensorLocation">
+          </div>
+          <div class="form-group">
+            <label for="Measurement">Measurement:</label>
+            <input type="text" class="form-control" id="Measurement" value="{{Measurement}}" name="Measurement">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+      </div>
+{% include 'footer.html' %}
