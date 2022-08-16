@@ -125,60 +125,6 @@ def dBcreateMySQLtableMeasuredData():
 # http://localhost:5000/api/v1/createMySQLtableMeasuredData/  
 
 
-@app.route('/api/v1/insertSetpointMySQL/', methods=['GET', 'POST'])
-def dBinsertSetpointMySQL():
-    # 
-    # default response if no post
-    responseData = {'code':'200', 'message' :'OK', 'IOTSensorLocation': '13111111' , 'Measurement': 'Temperature', 'Setpoint' : 21 , 'Deadband' : 2, 'Value' : 0}
-
-    if request.method == 'POST':                                               # procees HTTP POST
-        strIOTSensorLocation =  request.form['IOTSensorLocation']         # gets the form key / value pair - gets the value for 'IOTSensorLocation'
-        strMeasurement =  request.form['Measurement']                 # gets the form key / value pair - gets the value for 'Measurement'
-        strSetpoint =  request.form['Setpoint']                 # gets the form key / value pair - gets the value for 'username'
-        strDeadband = request.form['Deadband']
-              # gets the form key / value pair - gets the value for 'username'
-    # replace this with POST reqiest to AWS V5 , return JSON data to populate template
-        try:
-            conn = mysql.connector.connect(host="localhost", user="I40", passwd="Password1",database= mySQLdb2022)
-            cur = conn.cursor(prepared=True)
-            # https://stackoverflow.com/questions/60752474/how-to-insert-value-into-date-column-in-mysql-table-from-python-3
-            strDate = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            stmt = "INSERT INTO SetpointsV3 (IOTSensorLocation, Measurement, Setpoint, Deadband  ) VALUES (%s, %s, %s, %s)"
-            #https://stackoverflow.com/questions/34046634/insert-into-a-mysql-database-timestamp
-            cur.execute(stmt, (strIOTSensorLocation, strMeasurement, strSetpoint , strDeadband ))
-
-            # added for V5
-            stmtSelect = "SELECT Value FROM MeasuredDataV3 WHERE IOTSensorLocation = %s AND Measurement = %s ORDER BY readdate DESC LIMIT 1"
-            cur = conn.cursor(prepared=True) # is this needed?
-            cur.execute(stmtSelect, (strIOTSensorLocation, strMeasurement ))
-            rows = cur.fetchone() #cur.fetchall()
-
-            if rows == None:        # no MeasuredData for this IOTSensorLocation
-                responseData = {'code':'200', 'message' :'OK', 'IOTSensorLocation': strIOTSensorLocation , 'Measurement': strMeasurement, 'Setpoint' : '20' , 'Deadband' : '0', 'Value' : 0}
-            else :
-                measuredValue = rows[0] # redundant
-                responseData = {'code':'200', 'message' :'OK', 'IOTSensorLocation': strIOTSensorLocation , 'Measurement': strMeasurement, 'Setpoint' : strSetpoint , 'Deadband' : strDeadband, 'Value' : rows[0]}
-            conn.commit()
-        except mysql.connector.Error as err:
-            responseData = {'code':'500', 'Value' : -1 , 'message' : '{}'.format(err)}    # format as a string 
-        finally:
-            if conn:
-                conn.close()
-
-    templateData = {
-        'Value' : responseData["Value"],
-        'IOTSensorLocation' : responseData["IOTSensorLocation"],
-        'Measurement' : responseData["Measurement"],
-        'Setpoint' : responseData["Setpoint"],
-        'Deadband' : responseData["Deadband"],
-        'test' : '100'      # issue with this displaying should be measured value
-        }
-            
-    return render_template("insertSetpointFormDisplay9a.html", **templateData)                              # procees HTTP GET - render ex5.html if not yet logged in om templates folder in project
-# https://dev.mysql.com/doc/connector-python/en/connector-python-example-cursor-transaction.html
-# https://dev.mysql.com/doc/connector-python/en/connector-python-api-mysqlcursorprepared.html
-# https://stackoverflow.com/questions/60752474/how-to-insert-value-into-date-column-in-mysql-table-from-python-3
-# http://localhost:5000/api/v1/insertSetpointMySQL/  
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
