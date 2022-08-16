@@ -38,12 +38,9 @@ def dBselectSetpointWHEREMySQL():
             conn = mysql.connector.connect(host="localhost", user="I40", passwd="Password1",database= mySQLdb2022)
 
             # added for V5
-            stmtSelect = "SELECT * FROM MeasuredDataV3 WHERE IOTSensorLocation = %s AND Measurement = %s ORDER BY readdate DESC LIMIT 1"
+            stmtSelect = "SELECT * FROM MeasuredDataV3 WHERE IOTSensorLocation = %s AND Measurement = %s ORDER BY readdate DESC "
             cur = conn.cursor(prepared=True) # is this needed?
             cur.execute(stmtSelect, (strIOTSensorLocation, strMeasurement ))
-            rows = cur.fetchone() #cur.fetchall()
-
-
             data = cur.fetchall()
 
         #
