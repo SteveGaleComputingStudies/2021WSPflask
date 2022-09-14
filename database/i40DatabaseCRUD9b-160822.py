@@ -39,7 +39,7 @@ def dBselectSetpointWHEREMySQL():
 
             # added for V5
             stmtSelect = "SELECT * FROM MeasuredDataV3 WHERE IOTSensorLocation = %s AND Measurement = %s ORDER BY readdate DESC "
-            cur = conn.cursor(prepared=True) # is this needed?
+            cur = conn.cursor() # removed prepared=True
             cur.execute(stmtSelect, (strIOTSensorLocation, strMeasurement ))
             data = cur.fetchall()
 
@@ -136,7 +136,7 @@ def dBcreateMySQLdb():
 def dBcreateMySQLtableSetpoints():
     try: 
         conn = mysql.connector.connect(host="localhost", user="I40", passwd="Password1",database= mySQLdb2022)
-        cur = conn.cursor(prepared=True)
+        cur = conn.cursor() # removed prepared=True
         sqlCreateTableSetpoints = "CREATE TABLE SetpointsV3 (id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, IOTSensorLocation VARCHAR(20) NOT NULL,Measurement VARCHAR(16),Setpoint VARCHAR(8),Deadband VARCHAR(8), setDate TIMESTAMP)"
         cur.execute(sqlCreateTableSetpoints)
         responseData = {'code':'200', 'message' :'OK - Table created'}
@@ -154,7 +154,7 @@ def dBcreateMySQLtableSetpoints():
 def dBcreateMySQLtableMeasuredData():
     try: 
         conn = mysql.connector.connect(host="localhost", user="I40", passwd="Password1",database= mySQLdb2022)
-        cur = conn.cursor(prepared=True)
+        cur = conn.cursor() # removed prepared=True
         sqlCreateTableMeasuredData = "CREATE TABLE MeasuredDataV3 (id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, IOTSensorLocation VARCHAR(20) NOT NULL, Measurement VARCHAR(16), Value VARCHAR(8), readDate TIMESTAMP )"
         cur.execute(sqlCreateTableMeasuredData)
         responseData = {'code':'200', 'message' :'OK - Table created'}
@@ -183,7 +183,7 @@ def dBinsertSetpointMySQL():
     # replace this with POST reqiest to AWS V5 , return JSON data to populate template
         try:
             conn = mysql.connector.connect(host="localhost", user="I40", passwd="Password1",database= mySQLdb2022)
-            cur = conn.cursor(prepared=True)
+            cur = conn.cursor() # removed prepared=True
             # https://stackoverflow.com/questions/60752474/how-to-insert-value-into-date-column-in-mysql-table-from-python-3
             strDate = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             stmt = "INSERT INTO SetpointsV3 (IOTSensorLocation, Measurement, Setpoint, Deadband  ) VALUES (%s, %s, %s, %s)"
@@ -192,7 +192,7 @@ def dBinsertSetpointMySQL():
 
             # added for V5
             stmtSelect = "SELECT Value FROM MeasuredDataV3 WHERE IOTSensorLocation = %s AND Measurement = %s ORDER BY readdate DESC LIMIT 1"
-            cur = conn.cursor(prepared=True) # is this needed?
+            cur = conn.cursor() # removed prepared=True
             cur.execute(stmtSelect, (strIOTSensorLocation, strMeasurement ))
             rows = cur.fetchone() #cur.fetchall()
 

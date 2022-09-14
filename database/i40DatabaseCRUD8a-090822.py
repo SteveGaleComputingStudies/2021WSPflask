@@ -48,7 +48,7 @@ def dBcreateMySQLdb():
 def dBcreateMySQLtableSetpoints():
     try: 
         conn = mysql.connector.connect(host="localhost", user="I40", passwd="Password1",database= mySQLdb2022)
-        cur = conn.cursor(prepared=True)
+        cur = conn.cursor() # removed prepared=True
         sqlCreateTableSetpoints = "CREATE TABLE SetpointsV3 (id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, IOTSensorLocation VARCHAR(20) NOT NULL,Measurement VARCHAR(16),Setpoint VARCHAR(8),Deadband VARCHAR(8), setDate TIMESTAMP)"
         cur.execute(sqlCreateTableSetpoints)
         responseData = {'code':'200', 'message' :'OK - Table created'}
@@ -66,7 +66,7 @@ def dBcreateMySQLtableSetpoints():
 def dBcreateMySQLtableMeasuredData():
     try: 
         conn = mysql.connector.connect(host="localhost", user="I40", passwd="Password1",database= mySQLdb2022)
-        cur = conn.cursor(prepared=True)
+        cur = conn.cursor() # removed prepared=True
         sqlCreateTableMeasuredData = "CREATE TABLE MeasuredDataV3 (id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, IOTSensorLocation VARCHAR(20) NOT NULL, Measurement VARCHAR(16), Value VARCHAR(8), readDate TIMESTAMP )"
         cur.execute(sqlCreateTableMeasuredData)
         responseData = {'code':'200', 'message' :'OK - Table created'}
