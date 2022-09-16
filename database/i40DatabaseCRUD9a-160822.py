@@ -140,10 +140,11 @@ def dBinsertSetpointMySQL():
     # replace this with POST reqiest to AWS V5 , return JSON data to populate template
         try:
             conn = mysql.connector.connect(host="localhost", user="I40", passwd="Password1",database= mySQLdb2022)
-            cur = conn.cursor() # removed prepared=True
+            cur = conn.cursor() # removed prepared = true
             # https://stackoverflow.com/questions/60752474/how-to-insert-value-into-date-column-in-mysql-table-from-python-3
+            # setDate required for python insert as NOW() doesnt work in query as per PHP
             strDate = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            stmt = "INSERT INTO SetpointsV3 (IOTSensorLocation, Measurement, Setpoint, Deadband  ) VALUES (%s, %s, %s, %s)"
+            stmt = "INSERT INTO SetpointsV3 (IOTSensorLocation, Measurement, Setpoint, Deadband , setDate ) VALUES (%s, %s, %s, %s, %s)"
             #https://stackoverflow.com/questions/34046634/insert-into-a-mysql-database-timestamp
             cur.execute(stmt, (strIOTSensorLocation, strMeasurement, strSetpoint , strDeadband ))
 
